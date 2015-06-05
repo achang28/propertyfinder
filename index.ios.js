@@ -1,24 +1,25 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
+var React = require('react-native');
+var SearchPage = require("./SearchPage");
+var { StyleSheet, Text, TextInput, View, TouchableHighlight, ActivityIndicatorIOS, Image, Component } = React;
+var styles = React.StyleSheet.create({
+	container: {
+  		color: '#a4a4a4',
+    	flex: 1
+  	}
+});
 
-var RN = require('react-native');
-
-var styles = RN.StyleSheet.create({
-	text: {
-		color: "blue",
-		backgroundColor: "red",
-		fontSize: 30,
-		margin: 80,
-	}
-})
-
-class PropertyFinderApp extends RN.Component {
+class PropertyFinderApp extends React.Component {
 	render() {
-		return RN.createElement(RN.Text, {style: styles.text,}, "Fuck you!");
+		return (
+			<React.NavigatorIOS
+				style = {styles.container}
+				initialRoute={{
+					title: "Property Finder",
+					component: SearchPage,
+				}} />
+		)
 	}
 }
 
-RN.AppRegistry.registerComponent('PropertyFinder', () => PropertyFinderApp);
+React.AppRegistry.registerComponent('PropertyFinder', () => PropertyFinderApp);
