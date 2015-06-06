@@ -56,7 +56,7 @@ class SearchResults extends Component {
 			title: "Property",
 			component: PropertyView,
 			passProps: {
-				property:property
+				property: property
 			}
 		});
 	}

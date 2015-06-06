@@ -2,14 +2,15 @@
 var React = require('react-native');
 var SearchResults = require("./SearchResults");
 var {
+	ActivityIndicatorIOS,
+	Component,
+	Image,
+	ScrollView,
 	StyleSheet,
 	Text,
 	TextInput,
-	View,
 	TouchableHighlight,
-	ActivityIndicatorIOS,
-	Image,
-	Component
+	View
 } = React;
 
 var styles = React.StyleSheet.create({
@@ -21,8 +22,13 @@ var styles = React.StyleSheet.create({
 	},
 	container: {
 		padding: 30,
-		marginTop: 65,
+		// marginTop: 65,
 		alignItems: "center",
+	},
+	container2: {
+		marginTop: 65,
+		flex: 1,
+		backgroundColor: "black",
 	},
 	flowRight: {
 	  flexDirection: 'row',
@@ -150,33 +156,35 @@ class SearchPage extends React.Component {
 		var spinner = this.state.isLoading ? (<ActivityIndicatorIOS hidden="true" size="large" />) : (<View />);
 		console.log('SearchPage.render');
 		return (
-			<View style={styles.container}>
-				<Text style={{color: 'red', fontSize: 18}}>{this.state.searchString}</Text>
-				<Text style={styles.description}>
-					Seach for houses to buy!
-				</Text>
-				<Text style={styles.description}>
-					Search by place-name, postcode or search near your location.
-				</Text>
+			<ScrollView style={styles.container2}>
+				<View style={styles.container}>
+					<Text style={{color: 'red', fontSize: 18}}>{this.state.searchString}</Text>
+					<Text style={styles.description}>
+						Seach for houses to buy!
+					</Text>
+					<Text style={styles.description}>
+						Search by place-name, postcode or search near your location.
+					</Text>
 
-				<View style={styles.flowRight}>
-					<TextInput
-						style={styles.searchInput}
-						onChange={this.onSearchTextChanged.bind(this)}
-						placeholder="Search via name or postcode"
-						value={this.state.searchString} />
-					<TouchableHighlight style={styles.button} underlayColor="#99d9f4" onPress={this.onSearchPressed.bind(this)}>
-						<Text style={styles.buttonText}>Go</Text>
+					<View style={styles.flowRight}>
+						<TextInput
+							style={styles.searchInput}
+							onChange={this.onSearchTextChanged.bind(this)}
+							placeholder="Search via name or postcode"
+							value={this.state.searchString} />
+						<TouchableHighlight style={styles.button} underlayColor="#99d9f4" onPress={this.onSearchPressed.bind(this)}>
+							<Text style={styles.buttonText}>Go</Text>
+						</TouchableHighlight>
+					</View>
+
+					<TouchableHighlight style={styles.button} underlayColor='#99d9f4' onPress={this.onLocationPressed.bind(this)}>
+					  <Text style={styles.buttonText}>Location</Text>
 					</TouchableHighlight>
+					<Image source={require('image!house')} style={styles.image} />
+					{spinner}
+					<Text style={styles.description} > {this.state.message}</Text>
 				</View>
-
-				<TouchableHighlight style={styles.button} underlayColor='#99d9f4' onPress={this.onLocationPressed.bind(this)}>
-				  <Text style={styles.buttonText}>Location</Text>
-				</TouchableHighlight>
-				<Image source={require('image!house')} style={styles.image} />
-				{spinner}
-				<Text style={styles.description} > {this.state.message}</Text>
-			</View>
+			</ScrollView>
 		);
 	}
 }

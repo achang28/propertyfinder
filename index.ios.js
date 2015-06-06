@@ -1,22 +1,33 @@
 'use strict';
 var React = require('react-native');
 var SearchPage = require("./SearchPage");
-var { StyleSheet, Text, TextInput, View, TouchableHighlight, ActivityIndicatorIOS, Image, Component } = React;
-var styles = React.StyleSheet.create({
+var {
+	Component,
+	StyleSheet,
+	NavigatorIOS
+} = React;
+
+var styles = StyleSheet.create({
 	container: {
-  		color: '#a4a4a4',
-    	flex: 1
+  		color: 'blue',
+    	flex: 1,
+  	},
+  	navBar: {
+		backgroundColor: 'blue',
+		flex: 1,
+		opacity: 1,
   	}
 });
 
-class PropertyFinderApp extends React.Component {
+class PropertyFinderApp extends Component {
 	render() {
 		return (
-			<React.NavigatorIOS
+			<NavigatorIOS
 				style = {styles.container}
 				initialRoute={{
 					title: "Property Finder",
 					component: SearchPage,
+					wrapperStyle: styles.navBar
 				}} />
 		)
 	}
